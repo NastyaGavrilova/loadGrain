@@ -1,33 +1,33 @@
-const rightCheck = (levels, len) => {
-  const right = [];
-  for (let i = 0; i < len; i++) {
-    right.push(i);
-  }
-  right[0] = levels[0];
-
-  for (let i = 0; i < len - 1; i++) {
-    if (levels[i] > right[i]) {
-      right[i] = levels[i];
-    }
-    right[i + 1] = right[i];
-  }
-  return right;
-};
-
 const leftCheck = (levels, len) => {
   const left = [];
   for (let i = 0; i < len; i++) {
     left.push(i);
   }
-  left[len - 1] = levels[len - 1];
+  left[0] = levels[0];
 
-  for (let i = len - 1; i > 0; i--) {
+  for (let i = 0; i < len - 1; i++) {
     if (levels[i] > left[i]) {
       left[i] = levels[i];
     }
-    left[i - 1] = left[i];
+    left[i + 1] = left[i];
   }
   return left;
+};
+
+const rightCheck = (levels, len) => {
+  const right = [];
+  for (let i = 0; i < len; i++) {
+    right.push(i);
+  }
+  right[len - 1] = levels[len - 1];
+
+  for (let i = len - 1; i > 0; i--) {
+    if (levels[i] > right[i]) {
+      right[i] = levels[i];
+    }
+    right[i - 1] = right[i];
+  }
+  return right;
 };
 
 const loadGrain = (levels) => {
