@@ -1,13 +1,5 @@
-"use strict";
-
-const loadGrain = (levels) => {
+const rightCheck = (levels, len) => {
   const right = [];
-  const left = [];
-  let result = 0;
-  const len = levels.length;
-
-  if (len < 3) return 0;
-
   for (let i = 0; i < len; i++) {
     right.push(i);
   }
@@ -19,7 +11,11 @@ const loadGrain = (levels) => {
     }
     right[i + 1] = right[i];
   }
+  return right;
+};
 
+const leftCheck = (levels, len) => {
+  const left = [];
   for (let i = 0; i < len; i++) {
     left.push(i);
   }
@@ -31,9 +27,19 @@ const loadGrain = (levels) => {
     }
     left[i - 1] = left[i];
   }
+  return left;
+};
+
+const loadGrain = (levels) => {
+  let result = 0;
+  const len = levels.length;
+
+  if (len < 3) return 0;
 
   for (let i = 0; i < len; i++) {
-    let addToResult = Math.min(right[i], left[i]) - levels[i];
+    const r = rightCheck(levels, len);
+    const l = leftCheck(levels, len);
+    let addToResult = Math.min(r[i], l[i]) - levels[i];
     if (addToResult > 0) {
       result += addToResult;
     }
